@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Downloader</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Instagram Downloader Videos</h1>
+        <form method="post" action="/">
+            <div class="form-group">
+                <label for="video_url">Digite a URL do video que você deseja baixar</label>
+                <input type="text" class="form-control" id="video_url" name="video_url" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Baixar</button>
+        </form>
+        {% if success %}
+            <div class="mt-3">
+                <p style="color: green;">{{ message }}</p>
+                {% if video_file_path %}
+                    <p>Caso não vá em cima clique aqui!, <a href="{{ url_for('download_file', filename=video_file_path.split('/')[-1]) }}" download>Clique aqui</a></p>
+                {% endif %}
+            </div>
+        {% elif success == False %}
+            <div class="mt-3">
+                <p style="color: red;">{{ message }}</p>
+            </div>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
